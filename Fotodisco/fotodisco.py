@@ -24,6 +24,13 @@ def draw_text(surface, text, size, x, y):
 	text_rect.midtop = (x, y)
 	surface.blit(text_surface, text_rect)
 
+def draw_text1(surface, text, size, x, y):
+	font = pygame.font.SysFont("serif", size)
+	text_surface = font.render(text, True, BLACK)
+	text_rect = text_surface.get_rect()
+	text_rect.midtop = (x, y)
+	surface.blit(text_surface, text_rect)
+
 class Box1(pygame.sprite.Sprite):
 	def __init__(self):
 		super().__init__()
@@ -142,119 +149,7 @@ class Box3(pygame.sprite.Sprite):
 			if num1 >= 326 and num1 <= 328:
 				self.image = box_images[7] # spotion
 
-class Box4(pygame.sprite.Sprite):
-	def __init__(self):
-		super().__init__()
-		self.image = box_images[0]# pokeb
-		self.image.set_colorkey(WHITE)
-		self.rect = self.image.get_rect()
-		self.rect.centerx = 100
-		self.rect.centery = 100
 
-	def update(self):
-		pass
-		
-class Box5(pygame.sprite.Sprite):
-	def __init__(self):
-		super().__init__()
-		self.image = box_images[1] # superb
-		self.image.set_colorkey(WHITE)
-		self.rect = self.image.get_rect()
-		self.rect.centerx = 100
-		self.rect.centery = 200
-
-class Box6(pygame.sprite.Sprite):
-	def __init__(self):
-		super().__init__()
-		self.image = box_images[2] # ultrab
-		self.image.set_colorkey(WHITE)
-		self.rect = self.image.get_rect()
-		self.rect.centerx = 100
-		self.rect.centery = 200
-
-class Box7(pygame.sprite.Sprite):
-	def __init__(self):
-		super().__init__()
-		self.image = box_images[3] # frambu
-		self.image.set_colorkey(WHITE)
-		self.rect = self.image.get_rect()
-		self.rect.centerx = 100
-		self.rect.centery = 200
-
-class Box8(pygame.sprite.Sprite):
-	def __init__(self):
-		super().__init__()
-		self.image = box_images[4] # latano
-		self.image.set_colorkey(WHITE)
-		self.rect = self.image.get_rect()
-		self.rect.centerx = 100
-		self.rect.centery = 200
-
-class Box9(pygame.sprite.Sprite):
-	def __init__(self):
-		super().__init__()
-		self.image = box_images[5] # piña
-		self.image.set_colorkey(WHITE)
-		self.rect = self.image.get_rect()
-		self.rect.centerx = 100
-		self.rect.centery = 200
-
-class Box10(pygame.sprite.Sprite):
-	def __init__(self):
-		super().__init__()
-		self.image = box_images[6] # potion
-		self.image.set_colorkey(WHITE)
-		self.rect = self.image.get_rect()
-		self.rect.centerx = 100
-		self.rect.centery = 200
-
-class Box11(pygame.sprite.Sprite):
-	def __init__(self):
-		super().__init__()
-		self.image = box_images[7] # spotion
-		self.image.set_colorkey(WHITE)
-		self.rect = self.image.get_rect()
-		self.rect.centerx = 100
-		self.rect.centery = 200
-
-class Box12(pygame.sprite.Sprite):
-	def __init__(self):
-		super().__init__()
-		self.image = box_images[8] # hpotion
-		self.image.set_colorkey(WHITE)
-		self.rect = self.image.get_rect()
-		self.rect.centerx = 100
-		self.rect.centery = 200
-
-class Box13(pygame.sprite.Sprite):
-	def __init__(self):
-		super().__init__()
-		self.image = box_images[9] # mpotion
-		self.image.set_colorkey(WHITE)
-		self.rect = self.image.get_rect()
-		self.rect.centerx = 100
-		self.rect.centery = 200
-
-class Box14(pygame.sprite.Sprite):
-	def __init__(self):
-		super().__init__()
-		self.image = box_images[10] # revive
-		self.image.set_colorkey(WHITE)
-		self.rect = self.image.get_rect()
-		self.rect.centerx = 100
-		self.rect.centery = 200
-
-class Box15(pygame.sprite.Sprite):
-	def __init__(self):
-		super().__init__()
-		self.image = box_images[11] # revivem
-		self.image.set_colorkey(WHITE)
-		self.rect = self.image.get_rect()
-		self.rect.centerx = 100
-		self.rect.centery = 200
-
-	def update(self):
-		pass
 
 def show_go_screen():
 	
@@ -301,29 +196,14 @@ revivem = 0
 start = True
 while running:
 	if start:
-
 		show_go_screen()
-
 		start = False
 		screen.blit(background, [0,0])
 		all_sprites = pygame.sprite.Group()
 		box1 = Box1()
 		box2 = Box2()
 		box3 = Box3()
-		box4 = Box4()#pokeb
-		box5 = Box5()#superb
-		box6 = Box6()# ultrab
-		box7 = Box7()# frambu
-		box8 = Box8()# latano
-		box9 = Box9()# piña
-		box10 = Box10()# potion
-		box11 = Box11()# spotion
-		box12 = Box12()# hpotion
-		box13 = Box13()# mpotion
-		box14 = Box14()# revive
-		box15 = Box15()# revivem
-		all_sprites.add(box1, box2, box3, box4, box5, box6, box7, box8, box9, box10, box11, box12, box13, box14, box15)
-				
+		all_sprites.add(box1, box2, box3)		
 		scounter = True
 		counter = True
 		score = 50
@@ -333,6 +213,8 @@ while running:
 	for event in pygame.event.get():
 		if event.type == pygame.QUIT:
 			running = False
+			pygame.quit()
+			sys.exit()
 	
 	if score == 0:
 		game_over =True 
@@ -498,17 +380,17 @@ while running:
 
 	#Marcador
 	
-	draw_text(screen,"pokeball: " + str(pokeb), 20, 700, 50)
-	draw_text(screen,"superball: " + str(superb), 20, 700, 70)
-	draw_text(screen, "ultraball: " + str(ultrab), 20, 700, 90)
-	draw_text(screen, "frambu: " + str(frambu), 20, 700, 120)
-	draw_text(screen, "latano: " + str(latano), 20, 700, 140)
-	draw_text(screen, "piña " + str(piña), 20, 700, 160)
-	draw_text(screen, "potion " + str(potion), 20, 700, 190)
-	draw_text(screen,  "superpotion: " + str(spotion), 20, 700, 210)
-	draw_text(screen,  "hiperpotion: " + str(hpotion), 20, 700, 230)
-	draw_text(screen,  "maxpotion: " + str(mpotion), 20, 700, 250)
-	draw_text(screen,  "revive: " + str(revive), 20, 700, 270)
-	draw_text(screen,  "maxrevive: " + str(revivem), 20, 700, 290)
+	draw_text1(screen,"pokeball: " + str(pokeb), 20, 700, 50)
+	draw_text1(screen,"superball: " + str(superb), 20, 700, 70)
+	draw_text1(screen, "ultraball: " + str(ultrab), 20, 700, 90)
+	draw_text1(screen, "frambu: " + str(frambu), 20, 700, 120)
+	draw_text1(screen, "latano: " + str(latano), 20, 700, 140)
+	draw_text1(screen, "piña " + str(piña), 20, 700, 160)
+	draw_text1(screen, "potion " + str(potion), 20, 700, 190)
+	draw_text1(screen,  "superpotion: " + str(spotion), 20, 700, 210)
+	draw_text1(screen,  "hiperpotion: " + str(hpotion), 20, 700, 230)
+	draw_text1(screen,  "maxpotion: " + str(mpotion), 20, 700, 250)
+	draw_text1(screen,  "revive: " + str(revive), 20, 700, 270)
+	draw_text1(screen,  "maxrevive: " + str(revivem), 20, 700, 290)
 
 	pygame.display.flip()
